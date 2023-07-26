@@ -34,7 +34,7 @@ parser.add_argument(
 parser.add_argument(
     "--interface",
     "-i",
-    default="0.tcp.ap.ngrok.io",
+    default="2.tcp.eu.ngrok.io",
     help="network interface or IP address to host the HTTP server (default: eth0)",
 )
 
@@ -42,7 +42,7 @@ parser.add_argument(
     "--port",
     "-p",
     type=int,
-    default="15018",
+    default="12344",
     help="port to serve the HTTP server (default: 8000)",
 )
 
@@ -50,7 +50,7 @@ parser.add_argument(
     "--reverse",
     "-r",
     type=int,
-    default="15018",
+    default="4848",
     help="port to serve reverse shell on",
 )
 
